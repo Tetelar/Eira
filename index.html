@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  EIRA - Página informativa (landing page)
+  ------------------------------------------------------------
+  Este archivo es la ESTRUCTURA (HTML).
+  - El diseño está en:        styles.css
+  - La interactividad está en: script.js
+  Para verla, abre este archivo con doble clic en tu navegador,
+  o usa la extensión "Live Server" de VS Code.
+  ============================================================
+-->
+<html lang="es">
+<head>
+  <!-- Codificación de caracteres: permite usar tildes y ñ -->
+  <meta charset="UTF-8">
+  <!-- Hace que la página se adapte al ancho del celular -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Texto que muestran Google y las redes sociales -->
+  <meta name="description" content="Eira: tu compañera de bienestar. Recetas saludables, rutinas de ejercicio y seguimiento de hábitos en una sola app.">
+  <title>Eira | Bienestar a tu ritmo</title>
+  <!-- Ícono de la pestaña del navegador: el isotipo de Eira como SVG -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 921 921'%3E%3Crect width='921' height='921' rx='184' fill='%23899a5c'/%3E%3Cpath transform='translate(154 191) scale(.85)' d='M40 277V303A54 54 0 0 0 148 303V93.5A53.5 53.5 0 0 1 255 93.5V539.5A53.5 53.5 0 0 0 362 539.5V93A53 53 0 0 1 468 93V539.5A53.5 53.5 0 0 0 575 539.5V302.5A52.5 52.5 0 0 1 680 302.5V328' fill='none' stroke='%23efefef' stroke-width='80' stroke-linecap='round'/%3E%3C/svg%3E">
+
+  <!-- Tipografías de Google Fonts: Alice (marca) y Poppins (textos) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alice&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Enlazamos la hoja de estilos -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ======================= ENCABEZADO / MENÚ ======================= -->
+  <header class="header">
+    <nav class="nav container">
+      <a href="#inicio" class="logo" aria-label="Eira, ir al inicio">
+        <!-- Isotipo de Eira en SVG: una sola línea (path) gruesa con puntas redondeadas.
+             Al ser SVG se ve nítido en cualquier tamaño y toma el color del texto. -->
+        <svg class="logo-mark" viewBox="0 0 721 633" aria-hidden="true">
+          <path d="M40 277V303A54 54 0 0 0 148 303V93.5A53.5 53.5 0 0 1 255 93.5V539.5A53.5 53.5 0 0 0 362 539.5V93A53 53 0 0 1 468 93V539.5A53.5 53.5 0 0 0 575 539.5V302.5A52.5 52.5 0 0 1 680 302.5V328"
+                fill="none" stroke="currentColor" stroke-width="80" stroke-linecap="round"/>
+        </svg>
+        Eira
+      </a>
+
+      <!-- Botón de menú que solo se ve en celulares (lo controla script.js) -->
+      <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+
+      <ul class="nav-links">
+        <li><a href="#funciones">Funciones</a></li>
+        <li><a href="#recetas">Recetas</a></li>
+        <li><a href="#rutinas">Rutinas</a></li>
+        <li><a href="#habitos">Hábitos</a></li>
+        <li><a href="#como-funciona">Cómo funciona</a></li>
+        <li><a href="#faq">Preguntas</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li>
+          <!-- Botón para cambiar entre modo claro y oscuro -->
+          <button class="theme-toggle" aria-label="Cambiar tema">🌙</button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ======================= HERO (sección principal) ======================= -->
+    <section id="inicio" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <p class="eyebrow">Tu compañera de bienestar</p>
+          <h1>Cuida tu cuerpo, <span class="highlight">a tu ritmo</span>.</h1>
+          <p class="hero-sub">
+            Eira reúne recetas saludables, rutinas de ejercicio y el seguimiento
+            de tus hábitos en un solo lugar. Sin dietas extremas, sin presión:
+            pequeños pasos que suman.
+          </p>
+          <div class="hero-buttons">
+            <a href="#descargar" class="btn btn-primary">Comenzar gratis</a>
+            <a href="#funciones" class="btn btn-secondary">Conocer más</a>
+          </div>
+        </div>
+
+        <!-- Teléfono con la bienvenida de la app (basado en el mockup del branding).
+             Es interactivo: el botón "Continuar" recorre los 4 pasos (script.js, bloque 4). -->
+        <div class="hero-mockup">
+          <div class="phone" aria-label="Vista previa de la app Eira">
+            <div class="phone-notch" aria-hidden="true"></div>
+
+            <!-- Indicador de pasos: puntos unidos por una línea -->
+            <ol class="onb-steps" id="onb-steps">
+              <li><span class="onb-dot"></span>Bienvenido</li>
+              <li><span class="onb-dot"></span>Importante</li>
+              <li><span class="onb-dot"></span>Condición</li>
+              <li><span class="onb-dot"></span>Sobre ti</li>
+            </ol>
+
+            <!-- El contenido de cada paso lo pone JavaScript -->
+            <div class="onb-screen" id="onb-screen" aria-live="polite"></div>
+
+            <button class="btn btn-primary onb-btn" id="onb-next">Continuar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= FUNCIONES ======================= -->
+    <section id="funciones" class="section">
+      <div class="container">
+        <h2 class="section-title">Todo lo que necesitas para sentirte mejor</h2>
+        <p class="section-sub">Tres pilares para un estilo de vida más saludable.</p>
+
+        <div class="features">
+          <article class="feature-card">
+            <div class="feature-icon">🥗</div>
+            <h3>Recetas saludables</h3>
+            <p>Cientos de recetas fáciles, con información nutricional y filtros por tiempo, ingredientes o tipo de dieta.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon">🏃</div>
+            <h3>Rutinas de ejercicio</h3>
+            <p>Entrenamientos guiados para cualquier nivel: desde 10 minutos en casa hasta planes completos de gimnasio.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon">📈</div>
+            <h3>Seguimiento de hábitos</h3>
+            <p>Registra tu agua, sueño, ánimo y actividad. Visualiza tu progreso y celebra cada logro.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= RECETAS (con filtro en JavaScript) ======================= -->
+    <section id="recetas" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">Un adelanto de nuestras recetas</h2>
+        <p class="section-sub">Prueba los filtros y toca una receta para ver el detalle.</p>
+
+        <!-- Botones de filtro: el atributo data-filter le dice a JS qué mostrar -->
+        <div class="filters">
+          <button class="filter-btn active" data-filter="todas">Todas</button>
+          <button class="filter-btn" data-filter="desayuno">Desayuno</button>
+          <button class="filter-btn" data-filter="almuerzo">Almuerzo</button>
+          <button class="filter-btn" data-filter="snack">Snack</button>
+        </div>
+
+        <!-- Cada tarjeta tiene data-category para que el filtro sepa a qué grupo pertenece -->
+        <div class="recipes">
+          <article class="recipe-card" data-category="desayuno" data-recipe="avena" tabindex="0" role="button">
+            <div class="recipe-img">🥣</div>
+            <div class="recipe-body">
+              <h3>Avena con frutos rojos</h3>
+              <p class="recipe-meta">⏱ 10 min · 320 kcal</p>
+            </div>
+          </article>
+          <article class="recipe-card" data-category="almuerzo" data-recipe="quinoa" tabindex="0" role="button">
+            <div class="recipe-img">🥗</div>
+            <div class="recipe-body">
+              <h3>Bowl de quinoa y verduras</h3>
+              <p class="recipe-meta">⏱ 25 min · 450 kcal</p>
+            </div>
+          </article>
+          <article class="recipe-card" data-category="snack" data-recipe="batido" tabindex="0" role="button">
+            <div class="recipe-img">🍌</div>
+            <div class="recipe-body">
+              <h3>Batido de plátano y avena</h3>
+              <p class="recipe-meta">⏱ 5 min · 210 kcal</p>
+            </div>
+          </article>
+          <article class="recipe-card" data-category="desayuno" data-recipe="tostadas" tabindex="0" role="button">
+            <div class="recipe-img">🍳</div>
+            <div class="recipe-body">
+              <h3>Tostadas con palta y huevo</h3>
+              <p class="recipe-meta">⏱ 12 min · 380 kcal</p>
+            </div>
+          </article>
+          <article class="recipe-card" data-category="almuerzo" data-recipe="salmon" tabindex="0" role="button">
+            <div class="recipe-img">🐟</div>
+            <div class="recipe-body">
+              <h3>Salmón al horno con espárragos</h3>
+              <p class="recipe-meta">⏱ 30 min · 520 kcal</p>
+            </div>
+          </article>
+          <article class="recipe-card" data-category="snack" data-recipe="frutos-secos" tabindex="0" role="button">
+            <div class="recipe-img">🥜</div>
+            <div class="recipe-body">
+              <h3>Mix de frutos secos</h3>
+              <p class="recipe-meta">⏱ 2 min · 180 kcal</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= RUTINAS DE EJERCICIO ======================= -->
+    <!-- A diferencia de las recetas, estas tarjetas NO están escritas aquí:
+         script.js las crea automáticamente a partir de los datos (bloque 8). -->
+    <section id="rutinas" class="section">
+      <div class="container">
+        <h2 class="section-title">Rutinas para moverte a tu ritmo</h2>
+        <p class="section-sub">Elige una rutina y entrena con el temporizador guiado.</p>
+        <div class="routines" id="routines-list"></div>
+      </div>
+    </section>
+
+    <!-- ======================= SEGUIMIENTO DE HÁBITOS ======================= -->
+    <!-- Los controles están aquí en el HTML; script.js (bloque 9) les da vida
+         y guarda lo que registres en el navegador (localStorage). -->
+    <section id="habitos" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">Tu día en Eira</h2>
+        <p class="section-sub">Registra tus hábitos de hoy. Tus datos se guardan solo en este navegador.</p>
+
+        <div class="habits-layout">
+          <div class="habits-grid">
+            <!-- Agua -->
+            <article class="habit-card">
+              <div class="habit-head">
+                <span class="habit-icon">💧</span>
+                <div>
+                  <h3>Agua</h3>
+                  <p class="habit-goal">Meta: 8 vasos</p>
+                </div>
+                <span class="habit-value" id="water-value">0 / 8</span>
+              </div>
+              <!-- Los 8 vasos los crea JavaScript -->
+              <div class="glasses" id="glasses" aria-label="Vasos de agua"></div>
+              <div class="progress"><div class="progress-bar" id="water-progress"></div></div>
+            </article>
+
+            <!-- Sueño -->
+            <article class="habit-card">
+              <div class="habit-head">
+                <span class="habit-icon">😴</span>
+                <div>
+                  <h3>Sueño</h3>
+                  <p class="habit-goal">Meta: 7 horas o más</p>
+                </div>
+                <span class="habit-value" id="sleep-value">0 h</span>
+              </div>
+              <!-- input type="range" es un control deslizante -->
+              <label for="sleep-input" class="sr-only">Horas de sueño</label>
+              <input type="range" id="sleep-input" class="slider" min="0" max="12" step="0.5" value="0">
+              <div class="progress"><div class="progress-bar" id="sleep-progress"></div></div>
+            </article>
+
+            <!-- Actividad -->
+            <article class="habit-card">
+              <div class="habit-head">
+                <span class="habit-icon">🏃</span>
+                <div>
+                  <h3>Actividad</h3>
+                  <p class="habit-goal">Meta: 30 minutos</p>
+                </div>
+                <span class="habit-value" id="activity-value">0 / 30 min</span>
+              </div>
+              <div class="stepper">
+                <button class="step-btn" id="activity-minus" aria-label="Restar 10 minutos">−10</button>
+                <button class="step-btn" id="activity-plus" aria-label="Sumar 10 minutos">+10</button>
+                <span class="habit-hint">Al completar una rutina, sus minutos se suman solos.</span>
+              </div>
+              <div class="progress"><div class="progress-bar" id="activity-progress"></div></div>
+            </article>
+
+            <!-- Ánimo -->
+            <article class="habit-card">
+              <div class="habit-head">
+                <span class="habit-icon">🌤️</span>
+                <div>
+                  <h3>Ánimo</h3>
+                  <p class="habit-goal">¿Cómo te sientes hoy?</p>
+                </div>
+                <span class="habit-value" id="mood-value">—</span>
+              </div>
+              <!-- data-mood guarda el valor de cada opción (1 a 5) -->
+              <div class="moods" id="moods">
+                <button class="mood-btn" data-mood="1" aria-label="Muy mal" aria-pressed="false">😣</button>
+                <button class="mood-btn" data-mood="2" aria-label="Mal" aria-pressed="false">😕</button>
+                <button class="mood-btn" data-mood="3" aria-label="Normal" aria-pressed="false">😐</button>
+                <button class="mood-btn" data-mood="4" aria-label="Bien" aria-pressed="false">🙂</button>
+                <button class="mood-btn" data-mood="5" aria-label="Muy bien" aria-pressed="false">😄</button>
+              </div>
+            </article>
+          </div>
+
+          <!-- Resumen de la semana -->
+          <aside class="habits-summary">
+            <h3>Tu semana</h3>
+            <p class="streak"><span class="streak-number" id="streak">0</span> días de racha 🔥</p>
+            <p class="today-score" id="today-score">Hoy: 0 de 4 metas</p>
+
+            <!-- El gráfico de barras lo dibuja JavaScript con simples <div> -->
+            <div class="week-chart" id="week-chart" aria-label="Metas cumplidas en los últimos 7 días"></div>
+            <p class="chart-legend">Metas cumplidas por día. Un día cuenta para la racha con 3 de 4 metas.</p>
+
+            <div class="summary-actions">
+              <button class="btn btn-secondary btn-small" id="habits-demo">Cargar semana de ejemplo</button>
+              <button class="link-btn" id="habits-reset">Borrar mis datos</button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= CÓMO FUNCIONA ======================= -->
+    <section id="como-funciona" class="section">
+      <div class="container">
+        <!-- Sello circular del branding: el texto gira alrededor del isotipo.
+             <textPath> hace que un texto siga la forma de un camino (aquí, un círculo). -->
+        <div class="seal" aria-hidden="true">
+          <svg viewBox="0 0 200 200">
+            <defs>
+              <path id="seal-circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/>
+            </defs>
+            <g class="seal-text">
+              <text>
+                <textPath href="#seal-circle" textLength="488" lengthAdjust="spacing">EIRA · TU BIENESTAR SE CONSTRUYE DÍA A DÍA ·</textPath>
+              </text>
+            </g>
+            <path transform="translate(62 67) scale(0.105)"
+                  d="M40 277V303A54 54 0 0 0 148 303V93.5A53.5 53.5 0 0 1 255 93.5V539.5A53.5 53.5 0 0 0 362 539.5V93A53 53 0 0 1 468 93V539.5A53.5 53.5 0 0 0 575 539.5V302.5A52.5 52.5 0 0 1 680 302.5V328"
+                  fill="none" stroke="currentColor" stroke-width="80" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h2 class="section-title">Empieza en 3 pasos</h2>
+        <!-- <ol> es una lista ordenada: tiene sentido porque los pasos van en orden -->
+        <ol class="steps">
+          <li class="step">
+            <span class="step-number">1</span>
+            <h3>Cuéntanos de ti</h3>
+            <p>Tus objetivos, gustos y nivel de actividad.</p>
+          </li>
+          <li class="step">
+            <span class="step-number">2</span>
+            <h3>Recibe tu plan</h3>
+            <p>Recetas y rutinas adaptadas a lo que buscas.</p>
+          </li>
+          <li class="step">
+            <span class="step-number">3</span>
+            <h3>Avanza cada día</h3>
+            <p>Registra tus hábitos y mira cómo progresas.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ======================= PREGUNTAS FRECUENTES ======================= -->
+    <!-- <details> y <summary> crean un acordeón SIN necesidad de JavaScript -->
+    <section id="faq" class="section section-alt">
+      <div class="container container-narrow">
+        <h2 class="section-title">Preguntas frecuentes</h2>
+        <details class="faq-item">
+          <summary>¿Eira es gratis?</summary>
+          <p>Sí. Todas las funciones esenciales de Eira son y siempre serán gratuitas. Más adelante podríamos sumar alguna función opcional de pago, pero aún no está definido.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Necesito experiencia haciendo ejercicio?</summary>
+          <p>Para nada. Las rutinas tienen niveles desde principiante, y puedes avanzar a tu propio ritmo.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Eira reemplaza a un profesional de la salud?</summary>
+          <p>No. Eira es una herramienta de apoyo para tu bienestar. Ante cualquier condición médica, consulta con un profesional.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿En qué dispositivos funciona?</summary>
+          <p>Por ahora, Eira estará disponible solo para Android.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ======================= LLAMADO A LA ACCIÓN ======================= -->
+    <section id="descargar" class="cta">
+      <div class="container">
+        <h2>¿Listo para empezar a cuidarte?</h2>
+        <p>Déjanos tu correo y te avisaremos cuando Eira esté disponible.</p>
+        <!-- Formulario de ejemplo: JS evita que se envíe y muestra un mensaje -->
+        <form class="cta-form" id="signup-form">
+          <label for="email" class="sr-only">Correo electrónico</label>
+          <input type="email" id="email" placeholder="tu@correo.com" required>
+          <button type="submit" class="btn btn-light">Avísame</button>
+        </form>
+        <p class="form-message" id="form-message" role="status"></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================= VENTANA DE DETALLE DE RECETA ======================= -->
+  <!-- <dialog> es una ventana emergente nativa del navegador.
+       Está vacía: script.js la rellena con la receta que elijas. -->
+  <dialog class="modal" id="recipe-modal" aria-labelledby="modal-title">
+    <button class="modal-close" id="modal-close" aria-label="Cerrar">✕</button>
+    <div id="modal-content"></div>
+  </dialog>
+
+  <!-- ======================= VENTANA DE RUTINA CON TEMPORIZADOR ======================= -->
+  <dialog class="modal" id="routine-modal" aria-labelledby="routine-title">
+    <button class="modal-close" id="routine-close" aria-label="Cerrar">✕</button>
+    <div id="routine-content"></div>
+  </dialog>
+
+  <!-- ======================= PIE DE PÁGINA ======================= -->
+  <footer class="footer">
+    <div class="container">
+      <p>Eira · Tu bienestar se construye día a día</p>
+      <!-- El año lo pone JavaScript automáticamente -->
+      <p>© <span id="year"></span> Eira. Todos los derechos reservados.</p>
+      <p><a href="nosotros.html" class="footer-link">Conoce al equipo detrás de Eira →</a></p>
+    </div>
+  </footer>
+
+  <!-- El script va al final para que el HTML ya esté cargado cuando se ejecute -->
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1515 @@
+/* ============================================================
+   EIRA - Hoja de estilos
+   ------------------------------------------------------------
+   Organización:
+   1. Variables (colores, tamaños) — cámbialas y cambia todo el sitio
+   2. Base y utilidades
+   3. Componentes (botones, menú, tarjetas...)
+   4. Secciones
+   5. Responsive (adaptación a celular)
+   ============================================================ */
+
+/* ---------- 1. VARIABLES ---------- */
+/* :root guarda "variables CSS". Se usan con var(--nombre). */
+:root {
+  /* Patrón de ondas de la marca (fondo de la sección final) */
+  --pattern-waves: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 900'%3E%3Cg fill='none' stroke='%23899a5c' stroke-opacity='.3' stroke-width='80' stroke-linecap='round'%3E%3Cpath transform='translate(40 40) scale(.55)' d='M40 277V303A54 54 0 0 0 148 303V93.5A53.5 53.5 0 0 1 255 93.5V539.5A53.5 53.5 0 0 0 362 539.5V93A53 53 0 0 1 468 93V539.5A53.5 53.5 0 0 0 575 539.5V302.5A52.5 52.5 0 0 1 680 302.5V328'/%3E%3Cpath transform='translate(540 490) scale(.55)' d='M40 277V303A54 54 0 0 0 148 303V93.5A53.5 53.5 0 0 1 255 93.5V539.5A53.5 53.5 0 0 0 362 539.5V93A53 53 0 0 1 468 93V539.5A53.5 53.5 0 0 0 575 539.5V302.5A52.5 52.5 0 0 1 680 302.5V328'/%3E%3C/g%3E%3C/svg%3E");
+
+  /* Paleta del branding de Eira:
+     #333A22 (verde oscuro) · #EFEFEF (gris claro) · #899A5C (verde oliva) */
+  --color-primary: #899a5c;       /* verde oliva Eira */
+  --color-primary-dark: #333a22;  /* verde oscuro Eira */
+  --color-primary-text: #66753c;  /* oliva un poco más oscuro, para textos pequeños (se lee mejor) */
+  --color-bg: #f7f7f4;            /* fondo principal */
+  --color-bg-alt: #efefef;        /* fondo de secciones alternas */
+  --color-surface: #ffffff;       /* fondo de tarjetas */
+  --color-text: #333a22;
+  --color-text-soft: #5f6650;
+  --color-border: #dcdfd2;
+  --color-tint: #e3e8d4;          /* oliva muy suave para fondos decorativos */
+
+  --radius: 16px;
+  --shadow: 0 8px 24px rgba(51, 58, 34, 0.08);
+  --max-width: 1100px;
+  /* Alice: tipografía de la marca (títulos y logo). Poppins: textos largos. */
+  --font-brand: "Alice", Georgia, serif;
+  --font: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Modo oscuro: cuando <html> tiene data-theme="dark" (lo pone script.js),
+   solo redefinimos las variables y todo el sitio cambia de color. */
+[data-theme="dark"] {
+  --color-primary-text: #a9b97c;
+  --color-bg: #23281a;
+  --color-bg-alt: #2b3120;
+  --color-surface: #333a22;
+  --color-text: #efefef;
+  --color-text-soft: #c2c7b4;
+  --color-border: #444c30;
+  --color-tint: #3d4529;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Títulos y logo con la tipografía de marca.
+   Alice solo tiene un grosor (normal), por eso no usamos negrita. */
+h1,
+h2,
+h3,
+.logo {
+  font-family: var(--font-brand);
+  font-weight: 400;
+}
+
+/* ---------- 2. BASE ---------- */
+/* box-sizing: border-box hace que padding y borde se incluyan en el ancho */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth; /* desplazamiento suave al hacer clic en el menú */
+}
+
+body {
+  font-family: var(--font);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  transition: background 0.3s, color 0.3s;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Centra el contenido y limita su ancho */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.container-narrow {
+  max-width: 720px;
+}
+
+/* Oculta un elemento visualmente pero lo deja para lectores de pantalla */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+/* ---------- 3. COMPONENTES ---------- */
+
+/* Botones */
+.btn {
+  display: inline-block;
+  font-family: inherit; /* los <button> no heredan la fuente solos */
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-weight: 600;
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px); /* se "levanta" un poco al pasar el mouse */
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-dark);
+}
+
+.btn-secondary {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-light {
+  background: #fff;
+  color: var(--color-primary-dark);
+}
+
+/* Menú superior */
+.header {
+  position: sticky; /* se queda pegado arriba al hacer scroll */
+  top: 0;
+  z-index: 10;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.7rem;
+  letter-spacing: 1px;
+  text-transform: uppercase; /* el logo de la marca va en mayúsculas */
+  color: var(--color-primary);
+}
+
+/* Isotipo (la línea ondulada). Es un SVG: "currentColor" toma el color del texto */
+.logo-mark {
+  width: 36px;
+  height: 32px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--color-text-soft);
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: var(--color-primary);
+}
+
+.theme-toggle,
+.menu-toggle {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+.menu-toggle {
+  display: none; /* solo aparece en celular (ver sección 5) */
+}
+
+/* ---------- 4. SECCIONES ---------- */
+
+.section {
+  padding: 90px 0;
+}
+
+.section-alt {
+  background: var(--color-bg-alt);
+}
+
+.section-title {
+  text-align: center;
+  font-size: clamp(1.6rem, 4vw, 2.2rem); /* clamp = tamaño mínimo, ideal, máximo */
+  margin-bottom: 10px;
+}
+
+.section-sub {
+  text-align: center;
+  color: var(--color-text-soft);
+  margin-bottom: 50px;
+}
+
+/* HERO */
+.hero {
+  padding: 80px 0;
+}
+
+/* CSS Grid: dos columnas (texto | teléfono) */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+  gap: 50px;
+}
+
+.eyebrow {
+  color: var(--color-primary-text);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.highlight {
+  color: var(--color-primary-text);
+}
+
+.hero-sub {
+  font-size: 1.15rem;
+  color: var(--color-text-soft);
+  margin-bottom: 32px;
+  max-width: 520px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Teléfono simulado */
+.hero-mockup {
+  display: flex;
+  justify-content: center;
+}
+
+.phone {
+  width: 280px;
+  height: 540px; /* alto fijo: el teléfono no "salta" al cambiar de paso */
+  padding: 14px 20px 24px;
+  border-radius: 40px;
+  background: var(--color-bg);
+  border: 9px solid var(--color-text);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* La "isla" negra de la parte superior del teléfono */
+.phone-notch {
+  width: 84px;
+  height: 22px;
+  margin: 0 auto 22px;
+  border-radius: 999px;
+  background: var(--color-text);
+}
+
+/* Indicador de pasos: 4 columnas con una línea que pasa por detrás de los puntos */
+.onb-steps {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+  font-size: 0.56rem;
+  color: var(--color-text-soft);
+}
+
+.onb-steps::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 12.5%;
+  right: 12.5%;
+  height: 2px;
+  background: var(--color-border);
+}
+
+.onb-dot {
+  position: relative; /* para quedar por encima de la línea */
+  display: block;
+  width: 12px;
+  height: 12px;
+  margin: 0 auto 4px;
+  border-radius: 50%;
+  background: var(--color-border);
+  transition: background 0.3s, transform 0.3s;
+}
+
+.onb-steps li.done .onb-dot,
+.onb-steps li.active .onb-dot {
+  background: var(--color-primary);
+}
+
+.onb-steps li.active {
+  color: var(--color-text);
+}
+
+.onb-steps li.active .onb-dot {
+  transform: scale(1.3);
+}
+
+/* Contenido de cada paso, centrado en el espacio disponible */
+.onb-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  animation: fade-in 0.4s ease; /* se repite cada vez que JS cambia el contenido */
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+.onb-screen h3 {
+  font-size: 1.4rem;
+}
+
+.onb-screen p {
+  font-size: 0.85rem;
+  color: var(--color-text-soft);
+}
+
+.onb-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  color: var(--color-primary);
+  font-family: var(--font-brand);
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+}
+
+.onb-logo .logo-mark {
+  width: 70px;
+  height: 62px;
+}
+
+.onb-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  background: var(--color-tint);
+}
+
+/* Opciones seleccionables */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.chip {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.chip[aria-pressed="true"] {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+.onb-btn {
+  width: 100%;
+}
+
+.progress {
+  height: 8px;
+  background: var(--color-border);
+  border-radius: 999px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%; /* script.js va aumentando este ancho */
+  background: var(--color-primary);
+  transition: width 0.6s ease;
+}
+
+/* FUNCIONES: grid automático que se adapta solo al ancho */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.feature-card {
+  background: var(--color-surface);
+  padding: 32px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.25s;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+}
+
+.feature-icon {
+  font-size: 2.4rem;
+  margin-bottom: 14px;
+}
+
+.feature-card h3 {
+  margin-bottom: 8px;
+}
+
+.feature-card p {
+  color: var(--color-text-soft);
+}
+
+/* RECETAS */
+.filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+
+.filter-btn {
+  padding: 8px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.filter-btn.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+.recipes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.recipe-card {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+/* Las tarjetas ahora se pueden tocar para abrir el detalle */
+.recipe-card {
+  cursor: pointer;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.recipe-card:hover,
+.recipe-card:focus-visible {
+  transform: translateY(-6px);
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Clase que agrega script.js para ocultar tarjetas filtradas */
+.recipe-card.hidden {
+  display: none;
+}
+
+.recipe-img {
+  height: 130px;
+  display: grid;
+  place-items: center; /* centra el emoji vertical y horizontalmente */
+  font-size: 3.5rem;
+  background: linear-gradient(135deg, var(--color-tint), var(--color-bg-alt));
+}
+
+.recipe-body {
+  padding: 18px;
+}
+
+.recipe-meta {
+  color: var(--color-text-soft);
+  font-size: 0.9rem;
+}
+
+/* VENTANA DE DETALLE (modal) */
+.modal {
+  width: min(640px, calc(100% - 32px));
+  max-height: 88vh;
+  margin: auto;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow);
+  padding: 0;
+  overflow-y: auto; /* si la receta es larga, se puede hacer scroll dentro */
+}
+
+/* ::backdrop es el fondo oscuro detrás de la ventana */
+.modal::backdrop {
+  background: rgba(35, 40, 26, 0.65);
+}
+
+.modal-close {
+  position: sticky;
+  top: 12px;
+  z-index: 2; /* para que quede por encima de la foto */
+  float: right;
+  margin: 12px 12px 0 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+
+/* Foto del plato terminado */
+.modal-photo {
+  position: relative;
+  /* margen negativo para que la foto quede detrás del botón ✕ flotante */
+  margin-top: -50px;
+  aspect-ratio: 16 / 9; /* reserva el espacio aunque la foto aún no cargue */
+  background: linear-gradient(135deg, var(--color-tint), var(--color-bg-alt));
+}
+
+.modal-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* recorta la foto para llenar el espacio sin deformarla */
+  display: block;
+}
+
+/* Etiqueta sobre la foto, abajo a la izquierda */
+.modal-photo figcaption {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 0.8rem;
+}
+
+/* Emoji de respaldo cuando la foto no carga */
+.modal-emoji {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-size: 5rem;
+}
+
+.modal-header {
+  text-align: center;
+  padding: 24px 24px 0;
+}
+
+.modal-header p {
+  color: var(--color-text-soft);
+  margin-top: 6px;
+}
+
+.modal-body {
+  padding: 24px 28px 32px;
+}
+
+/* "Chips" de información rápida */
+.modal-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.stat {
+  background: var(--color-bg-alt);
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--color-text-soft);
+}
+
+.stat-value {
+  font-weight: 700;
+}
+
+.modal-body h3 {
+  margin: 24px 0 10px;
+  color: var(--color-primary-text);
+}
+
+/* Tabla de ingredientes: nombre a la izquierda, cantidad a la derecha */
+.ingredients {
+  list-style: none;
+}
+
+.ingredients li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.ingredients .amount {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.recipe-steps {
+  padding-left: 20px;
+}
+
+.recipe-steps li {
+  margin-bottom: 8px;
+}
+
+.healthy-box {
+  background: var(--color-bg-alt);
+  border-left: 4px solid var(--color-primary);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.modal-note {
+  margin-top: 20px;
+  font-size: 0.8rem;
+  color: var(--color-text-soft);
+}
+
+/* RUTINAS: tarjetas */
+.routines {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.routine-card {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  cursor: pointer;
+  transition: transform 0.25s;
+}
+
+.routine-card:hover,
+.routine-card:focus-visible {
+  transform: translateY(-6px);
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.routine-emoji {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  background: var(--color-tint);
+}
+
+.routine-card h3 {
+  margin: 8px 0 6px;
+}
+
+.routine-card p {
+  color: var(--color-text-soft);
+  font-size: 0.95rem;
+}
+
+/* Etiquetas pequeñas: nivel, duración */
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.badge {
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--color-tint);
+  color: var(--color-text);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* RUTINAS: ventana con temporizador */
+.modal-banner {
+  margin-top: -50px; /* igual que la foto de las recetas: queda bajo el botón ✕ */
+  height: 170px;
+  padding-top: 50px; /* compensa el margen negativo */
+  text-align: center;
+  line-height: 120px;
+  font-size: 4.5rem;
+  background: linear-gradient(135deg, var(--color-tint), var(--color-bg-alt));
+}
+
+.timer {
+  background: var(--color-bg-alt);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.timer-phase {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--color-primary-text);
+}
+
+/* Cuando es descanso, la etiqueta cambia de color */
+.timer.is-rest .timer-phase {
+  color: var(--color-text-soft);
+}
+
+.timer-exercise {
+  font-family: var(--font-brand);
+  font-size: 1.6rem;
+  margin: 4px 0 2px;
+}
+
+.timer-tip {
+  color: var(--color-text-soft);
+  font-size: 0.9rem;
+  min-height: 1.5em;
+}
+
+/* Anillo de progreso: dos círculos SVG, uno de fondo y otro que se va llenando */
+.timer-ring {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 18px auto;
+}
+
+.timer-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg); /* para que el progreso empiece arriba, como un reloj */
+}
+
+.ring-bg {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-width: 10;
+}
+
+.ring-progress {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-width: 10;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s linear;
+}
+
+.timer.is-rest .ring-progress {
+  stroke: var(--color-text-soft);
+}
+
+.timer-time {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 2.6rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums; /* números del mismo ancho: el reloj no "salta" */
+}
+
+.timer-next {
+  color: var(--color-text-soft);
+  font-size: 0.9rem;
+  margin-bottom: 18px;
+}
+
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.timer-controls .btn {
+  padding: 10px 22px;
+}
+
+/* Lista de ejercicios de la rutina */
+.exercise-list {
+  list-style: none;
+}
+
+.exercise-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+.exercise-list .amount {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Ejercicio que se está haciendo ahora */
+.exercise-list li.current {
+  background: var(--color-tint);
+  font-weight: 600;
+}
+
+/* Ejercicios ya terminados */
+.exercise-list li.done {
+  color: var(--color-text-soft);
+  text-decoration: line-through;
+}
+
+/* HÁBITOS */
+/* Dos columnas: tarjetas de hábitos (más ancha) y resumen semanal */
+.habits-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.habits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.habit-card,
+.habits-summary {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.habit-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.habit-icon {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0; /* que el círculo no se aplaste si falta espacio */
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.4rem;
+  background: var(--color-tint);
+}
+
+.habit-goal {
+  font-size: 0.8rem;
+  color: var(--color-text-soft);
+}
+
+.habit-value {
+  margin-left: auto; /* empuja el valor hacia la derecha */
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Vasos de agua */
+/* 8 columnas iguales: los vasos se achican si la tarjeta es angosta */
+.glasses {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 5px;
+  margin-bottom: 6px;
+}
+
+.glass {
+  aspect-ratio: 1; /* siempre cuadrados */
+  max-width: 40px;
+  padding: 0;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-alt);
+  font-size: 1rem;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.glass.filled {
+  opacity: 1;
+  background: var(--color-tint);
+  border-color: var(--color-primary);
+}
+
+.glass:hover {
+  transform: scale(1.1);
+}
+
+/* Control deslizante del sueño: accent-color pinta el control con el color de marca */
+.slider {
+  width: 100%;
+  accent-color: var(--color-primary);
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+/* Botones de actividad */
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.step-btn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--color-primary);
+  background: none;
+  color: var(--color-text);
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.step-btn:hover {
+  background: var(--color-tint);
+}
+
+.habit-hint {
+  font-size: 0.75rem;
+  color: var(--color-text-soft);
+  line-height: 1.3;
+}
+
+/* Ánimo */
+.moods {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.mood-btn {
+  flex: 1;
+  font-size: 1.6rem;
+  padding: 8px 0;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  background: var(--color-bg-alt);
+  cursor: pointer;
+  filter: grayscale(0.7);
+  transition: filter 0.2s, transform 0.2s;
+}
+
+.mood-btn:hover {
+  filter: none;
+  transform: translateY(-2px);
+}
+
+/* aria-pressed="true" lo pone script.js: lo usamos como selector de estilo */
+.mood-btn[aria-pressed="true"] {
+  filter: none;
+  border-color: var(--color-primary);
+  background: var(--color-tint);
+}
+
+/* Resumen semanal */
+.streak {
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+.streak-number {
+  font-family: var(--font-brand);
+  font-size: 2.4rem;
+  color: var(--color-primary-text);
+}
+
+.today-score {
+  color: var(--color-text-soft);
+  font-size: 0.9rem;
+}
+
+/* Gráfico: 7 columnas alineadas abajo; la altura de cada barra la pone JS */
+.week-chart {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  height: 150px;
+  margin-top: 20px;
+  align-items: end;
+}
+
+.bar-col {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+}
+
+.bar-track {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  background: var(--color-bg-alt);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.bar {
+  width: 100%;
+  background: var(--color-tint);
+  border-radius: 8px 8px 0 0;
+  transition: height 0.5s ease;
+}
+
+/* Días que cuentan para la racha (3 o 4 metas) */
+.bar.complete {
+  background: var(--color-primary);
+}
+
+.bar-label {
+  font-size: 0.75rem;
+  color: var(--color-text-soft);
+  text-transform: capitalize;
+}
+
+.bar-col.today .bar-label {
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.chart-legend {
+  font-size: 0.75rem;
+  color: var(--color-text-soft);
+  margin-top: 12px;
+}
+
+.summary-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.btn-small {
+  padding: 8px 18px;
+  font-size: 0.9rem;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--color-text-soft);
+  font-family: inherit;
+  font-size: 0.85rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* En pantallas medianas el resumen pasa debajo de las tarjetas */
+@media (max-width: 900px) {
+  .habits-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* CÓMO FUNCIONA */
+
+/* Sello circular del branding */
+.seal {
+  width: 150px;
+  margin: 0 auto 24px;
+  color: var(--color-primary);
+}
+
+.seal text {
+  font-family: var(--font-brand);
+  font-size: 14px;
+  fill: var(--color-text); /* en SVG el color del texto se pone con "fill" */
+}
+
+/* Solo el texto gira; el isotipo del centro se queda quieto */
+.seal-text {
+  transform-origin: 100px 100px; /* el centro del círculo */
+  animation: spin 30s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Si la persona pidió a su sistema "reducir el movimiento", no animamos */
+@media (prefers-reduced-motion: reduce) {
+  .seal-text {
+    animation: none;
+  }
+}
+.steps {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.step-number {
+  display: inline-grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.3rem;
+  margin-bottom: 14px;
+}
+
+.step p {
+  color: var(--color-text-soft);
+}
+
+/* PREGUNTAS FRECUENTES */
+.faq-item {
+  background: var(--color-surface);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+}
+
+.faq-item summary {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.faq-item p {
+  margin-top: 10px;
+  color: var(--color-text-soft);
+}
+
+/* LLAMADO A LA ACCIÓN */
+/* Fondo con el patrón de ondas del branding.
+   Es un SVG pequeño (2 isotipos) que se repite como baldosa con background-size.
+   En una URL, el # de los colores se escribe %23 y < se escribe %3C. */
+.cta {
+  background-color: var(--color-primary-dark);
+  background-image: var(--pattern-waves);
+  background-size: 120px auto;
+  color: #fff;
+  text-align: center;
+  padding: 80px 0;
+}
+
+.cta h2 {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  margin-bottom: 10px;
+}
+
+.cta-form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+.cta-form input {
+  padding: 14px 20px;
+  font-family: inherit; /* los campos de formulario no heredan la fuente solos */
+  border-radius: 999px;
+  border: none;
+  font-size: 1rem;
+  width: min(320px, 100%);
+}
+
+.form-message {
+  margin-top: 16px;
+  font-weight: 600;
+  min-height: 1.6em;
+}
+
+/* PIE DE PÁGINA */
+.footer {
+  padding: 30px 0;
+  text-align: center;
+  color: var(--color-text-soft);
+  font-size: 0.9rem;
+}
+
+/* ---------- 5. RESPONSIVE ---------- */
+/* Estas reglas solo se aplican cuando la pantalla mide 768px o menos */
+/* El menú tiene 7 enlaces, así que pasa a ☰ antes que el resto (1080px o menos) */
+@media (max-width: 1080px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  /* El menú se esconde y se vuelve vertical */
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 18px;
+    padding: 24px;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  /* script.js agrega la clase "open" al tocar el botón ☰ */
+  .nav-links.open {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  /* El hero pasa a una sola columna */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-sub {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .section {
+    padding: 60px 0;
+  }
+}
+
+/* ============================================================
+   NOSOTROS (nosotros.html)
+   ============================================================ */
+
+/* Ancho de lectura cómodo para textos largos */
+.container-about {
+  max-width: 820px;
+}
+
+.about-nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.about-back {
+  color: var(--color-text-soft);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.about-back:hover {
+  color: var(--color-primary-text);
+}
+
+.about-hero {
+  padding: 80px 0 30px;
+}
+
+.about-hero h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.about-lead {
+  font-size: 1.15rem;
+  color: var(--color-text-soft);
+}
+
+.about-section {
+  padding: 70px 0;
+}
+
+.about-section-alt {
+  background: var(--color-bg-alt);
+}
+
+.about-section h2 {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  margin-bottom: 18px;
+}
+
+.about-section p + p {
+  margin-top: 14px;
+}
+
+/* Número de cada sección: 01, 02... */
+.about-number {
+  font-family: var(--font-brand);
+  font-size: 1.1rem;
+  color: var(--color-primary-text);
+  letter-spacing: 2px;
+}
+
+.about-subtitle {
+  font-size: 1.4rem;
+  margin: 40px 0 14px;
+}
+
+.about-list {
+  padding-left: 20px;
+  margin-top: 12px;
+}
+
+.about-list li {
+  margin-bottom: 10px;
+}
+
+.about-cta {
+  margin-top: 28px;
+}
+
+/* Palabra destacada en "Investigación" */
+.about-highlight {
+  font-family: var(--font-brand);
+  font-size: clamp(2rem, 6vw, 3rem);
+  color: var(--color-primary-text);
+  text-align: center;
+  margin: 24px 0;
+}
+
+.about-section .about-highlight + p {
+  margin-top: 0;
+}
+
+/* Recuadros para completar: borde punteado para que se noten */
+.todo {
+  border: 2px dashed var(--color-primary);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  background: var(--color-surface);
+  color: var(--color-text-soft);
+}
+
+.todo ul {
+  padding-left: 20px;
+  margin-top: 8px;
+}
+
+.todo-label {
+  font-weight: 600;
+  color: var(--color-primary-text);
+  margin-bottom: 6px;
+}
+
+.todo-inline {
+  display: inline-block;
+  padding: 0 8px;
+  border: 1px dashed var(--color-primary);
+  border-radius: 6px;
+  color: var(--color-primary-text);
+  font-size: 0.9em;
+}
+
+/* Equipo */
+.team {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.team-card {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+
+.team-name {
+  font-weight: 600;
+}
+
+.team-role {
+  font-size: 0.9rem;
+  color: var(--color-text-soft);
+}
+
+/* Pilares */
+.about-pillars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.about-pillars article {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.about-pillars p {
+  font-size: 0.9rem;
+  color: var(--color-text-soft);
+}
+
+.about-pillar-icon {
+  font-size: 1.8rem;
+}
+
+@media (max-width: 640px) {
+  .about-back {
+    font-size: 0.8rem;
+  }
+}
+
+/* Enlace a "Nosotros" en el pie de página */
+.footer-link {
+  color: var(--color-primary-text);
+  font-weight: 600;
+  text-decoration: underline;
+}
