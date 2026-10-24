@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mapa del sitio: la lista de páginas que Google debe conocer.
+     Si agregas una página nueva, suma otro bloque <url>. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://tetelar.github.io/Eira/</loc>
+  </url>
+  <url>
+    <loc>https://tetelar.github.io/Eira/nosotros.html</loc>
+  </url>
+</urlset>
